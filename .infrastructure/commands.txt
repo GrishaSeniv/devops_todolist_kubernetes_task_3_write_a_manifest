@@ -1,5 +1,5 @@
 -- DOCKER Commands --
-docker build -t gseniv/todoapp:3.0.0 -f infrastructure/Dockerfile .
+docker build -t gseniv/todoapp:3.0.0 -f Dockerfile .
 docker run --name todoapp -p 8000:8000  gseniv/todoapp:3.0.0
 docker stop todoapp
 docker rm -v todoapp
@@ -22,4 +22,4 @@ curl <pod-ip>:8000
 kubectl delete pod busybox -n todoapp
 kubectl delete pod todoapp -n todoapp
 
-kubectl port-forward todoapp 8001:8080 -n todoapp
+kubectl port-forward pod/todoapp 8001:8080 -n todoapp

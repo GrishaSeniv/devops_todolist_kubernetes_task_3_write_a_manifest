@@ -1,16 +1,14 @@
 ## Apply Manifests
 
-Build images and start containers in detached mode:
-
 ```bash
 # Create the namespace
-kubectl apply -f infrastructure/namespace.yml
+kubectl apply -f .infrastructure/namespace.yml
 
 # Create the busybox pod for testing
-kubectl apply -f infrastructure/busybox.yml
+kubectl apply -f .infrastructure/busybox.yml
 
 # Create the main todoapp pod
-kubectl apply -f infrastructure/todoapp-pod.yml
+kubectl apply -f .infrastructure/todoapp-pod.yml
 ```
 
 After applying, you can check the status of the pods in the todoapp namespace:
@@ -61,7 +59,7 @@ This method allows you to test the application from your local machine (e.g., in
 1) Start the port forward: Run the following command. It will occupy your terminal until you stop it (with Ctrl+C). This command forwards your local port 8001 to the todoapp pod's port 8000.
 
 ```bash
-kubectl port-forward todoapp 8001:8000 -n todoapp
+kubectl port-forward pod/todoapp 8001:8000 -n todoapp
 
 # Example output:
 # Forwarding from 127.0.0.1:8001 -> 8000
