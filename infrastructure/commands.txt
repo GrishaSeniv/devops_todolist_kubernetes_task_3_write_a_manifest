@@ -1,0 +1,25 @@
+-- DOCKER Commands --
+docker build -t gseniv/todoapp:3.0.0 -f infrastructure/Dockerfile .
+docker run --name todoapp -p 8000:8000  gseniv/todoapp:3.0.0
+docker stop todoapp
+docker rm -v todoapp
+docker push gseniv/todoapp:3.0.0
+
+
+-- K8S Commands --
+kubectl apply -f infrastructure/namespace.yml
+kubectl apply -f infrastructure/busybox.yml
+kubectl apply -f infrastructure/todoapp-pod.yml
+
+kubectl get namespaces
+kubectl get pods -n todoapp -o wide
+kubectl describe pod busybox -n todoapp
+kubectl logs -f todoapp -n todoapp
+
+kubectl -n todoapp exec -it busybox -- sh
+curl <pod-ip>:8000
+
+kubectl delete pod busybox -n todoapp
+kubectl delete pod todoapp -n todoapp
+
+kubectl port-forward todoapp 8001:8080 -n todoapp
