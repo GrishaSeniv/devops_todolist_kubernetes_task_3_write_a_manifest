@@ -7,9 +7,9 @@ docker push gseniv/todoapp:3.0.0
 
 
 -- K8S Commands --
-kubectl apply -f infrastructure/namespace.yml
-kubectl apply -f infrastructure/busybox.yml
-kubectl apply -f infrastructure/todoapp-pod.yml
+kubectl apply -f .infrastructure/namespace.yml
+kubectl apply -f .infrastructure/busybox.yml
+kubectl apply -f .infrastructure/todoapp-pod.yml
 
 kubectl get namespaces
 kubectl get pods -n todoapp -o wide
@@ -17,9 +17,9 @@ kubectl describe pod busybox -n todoapp
 kubectl logs -f todoapp -n todoapp
 
 kubectl -n todoapp exec -it busybox -- sh
-curl <pod-ip>:8000
+http://<pod-ip>:8000/api/health/
 
 kubectl delete pod busybox -n todoapp
 kubectl delete pod todoapp -n todoapp
 
-kubectl port-forward pod/todoapp 8001:8080 -n todoapp
+kubectl port-forward pod/todoapp 8001:8000 -n todoapp
